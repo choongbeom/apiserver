@@ -1,0 +1,50 @@
+server:
+    port: 8081 # 서버 port 설정
+
+spring:
+    # DB 설정
+    datasource:
+        url: jdbc:h2:mem:testdb
+        driverClassName: org.h2.Driver
+        username: sa
+        password:
+
+    h2:
+        console:
+            enabled: true
+            path: /h2-console
+
+    # JPA 설정
+    jpa:
+    
+        database-platform: org.hibernate.dialect.H2Dialect # Name of the target database to operate on, auto-detected by default. Can be alternatively set using the “Database” enum.
+        database: H2 # Target database to operate on, auto-detected by default. Can be alternatively set using the “database-platform” property.
+        generate-ddl: true  # Initialize the schema on startup. # spring.jpa.hibernate.ddl-auto 속성을 사용할지 말지를 결정하는 옵션 default: false
+        
+        # OSIV 
+        # true일 경우 영속성 컨텍스트가 트랜잭션 범위를 넘어선 레이어까지 살아있다.
+        # Api라면 클라이언트에게 응답될 때까지, View라면 View가 렌더링될 때까지 영속성컨텍스트가 살아있다.
+        # defulat: true
+        open-in-view: true  # Register OpenEntityManagerInViewInterceptor. Binds a JPA EntityManager to the thread for the entire processing of the request.
+        show-sql: true  # Enable logging of SQL statements.
+
+        hibernate:            
+            # DDL(Data Definition Language): 스키마(Schema), 도메인(Domain), 테이블(Table), 뷰(View), 인덱스(Index)를 정의하거나 변경 또는 제거할 때 사용하는 언어
+            # none, update, validata, create, create-drop
+            # none: 초기화 동작을 하지 않는다.
+            # update:  기존의 스키마를 유지하며 JPA에 의해 변경된 부분만 추가한다.
+            # validate: 엔티티와 테이블이 정상적으로 매핑되어있는지만 검증한다.
+            # create: 기존에 존재하는 스키마를 삭제하고 새로 생성한다.
+            # create-drop: 스키마를 생성하고 애플리케이션이 종료될 때 삭제한다.
+            ddl-auto: update  # DDL mode. This is actually a shortcut for the # hbm2ddl.auto 동일속성 
+
+        properties: # Additional native properties to set on the JPA provider.
+            hibernate:
+                dialect: org.hibernate.dialect.H2Dialect # The classname of a Hibernate org.hibernate.dialect.Dialect which allows Hibernate to generate SQL optimized for a particular relational database.
+                format_sql: true # Pretty print the SQL in the log and console.
+
+logging:
+    level:
+        org.hibernate.SQL: debug
+        org.hibernate.type: trace
+
