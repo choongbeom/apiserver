@@ -14,7 +14,6 @@ public class InitializeApiserverApplication implements ApplicationRunner{
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        // TODO Auto-generated method stub
-        
+        // TODO Auto-generated method stub        
     }
 }

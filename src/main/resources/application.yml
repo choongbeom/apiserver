@@ -4,29 +4,34 @@ server:
 spring:
     # DB 설정
     datasource:
-        url: jdbc:h2:mem:testdb
-        driverClassName: org.h2.Driver
-        username: sa
-        password:
-
-    h2:
-        console:
-            enabled: true
-            path: /h2-console
+        #url: jdbc:h2:mem:testdb
+        #driver-class-name: org.h2.Driver
+        #username: sa
+        #password:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/cbkim?useSSL=false&useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        username: root
+        password: 1234qwer!
+        #initialization-mode: always
+    #h2:
+        #console:
+            #enabled: true
+            #path: /h2-console
 
     # JPA 설정
-    jpa:
-    
-        database-platform: org.hibernate.dialect.H2Dialect # Name of the target database to operate on, auto-detected by default. Can be alternatively set using the “Database” enum.
-        database: H2 # Target database to operate on, auto-detected by default. Can be alternatively set using the “database-platform” property.
+    jpa:    
+        #database-platform: org.hibernate.dialect.H2Dialect # Name of the target database to operate on, auto-detected by default. Can be alternatively set using the “Database” enum.
+        #database: H2 # Target database to operate on, auto-detected by default. Can be alternatively set using the “database-platform” property.
+        #database: mysql
+        database-platform: org.hibernate.dialect.MySQL5Dialect        
         generate-ddl: true  # Initialize the schema on startup. # spring.jpa.hibernate.ddl-auto 속성을 사용할지 말지를 결정하는 옵션 default: false
         
         # OSIV 
         # true일 경우 영속성 컨텍스트가 트랜잭션 범위를 넘어선 레이어까지 살아있다.
         # Api라면 클라이언트에게 응답될 때까지, View라면 View가 렌더링될 때까지 영속성컨텍스트가 살아있다.
         # defulat: true
-        open-in-view: true  # Register OpenEntityManagerInViewInterceptor. Binds a JPA EntityManager to the thread for the entire processing of the request.
-        show-sql: true  # Enable logging of SQL statements.
+        #open-in-view: true  # Register OpenEntityManagerInViewInterceptor. Binds a JPA EntityManager to the thread for the entire processing of the request.
+        show-sql: false  # Enable logging of SQL statements.
 
         hibernate:            
             # DDL(Data Definition Language): 스키마(Schema), 도메인(Domain), 테이블(Table), 뷰(View), 인덱스(Index)를 정의하거나 변경 또는 제거할 때 사용하는 언어
@@ -40,11 +45,20 @@ spring:
 
         properties: # Additional native properties to set on the JPA provider.
             hibernate:
-                dialect: org.hibernate.dialect.H2Dialect # The classname of a Hibernate org.hibernate.dialect.Dialect which allows Hibernate to generate SQL optimized for a particular relational database.
+                #dialect: org.hibernate.dialect.H2Dialect # The classname of a Hibernate org.hibernate.dialect.Dialect which allows Hibernate to generate SQL optimized for a particular relational database.
+                #dialect: org.hibernate.dialect.MySQL5Dialect
                 format_sql: true # Pretty print the SQL in the log and console.
+                #use_sql_comments : true # 콘솔에 표시되는 쿼리문 위에 어떤 실행을 하려는지 HINT를 표시합니다.
 
-logging:
-    level:
-        org.hibernate.SQL: debug
-        org.hibernate.type: trace
+    #sql:
+    #    init:
+    #        mode: always
 
+#logging:
+    #level:
+        #org.hibernate.SQL: debug
+        #org.hibernate.type: trace
+
+    #JWT Secret Key value
+    jwt:
+        secret: cndqja2021

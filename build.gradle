@@ -1,6 +1,8 @@
 plugins {
 	id 'org.springframework.boot' version '2.5.6'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	//querydsl 추가
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 	id 'java'
 }
 
@@ -12,28 +14,73 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	querydsl {
+		extendsFrom compileClasspath
+	}
 }
 
 repositories {
 	mavenCentral()
 }
 
+// compileOnly: 컴파일 시 처리됨
+// runtimeOnly: 실행 시 처리됨
+// compile: 직,간접적으로 의존하고 있는 모든 모듈을 재빌드함. (사용을 지향)
+// implementation: 직접적으로 의존하고 있는 모듈을 재빌드함.
+// annotationProcessor: 컴파일 시점으로 코드를 생성함, 에노테이션 사용을 위해 선언함.
+// developmentOnly: 코드 변경 자동 반영, 재시작없이 반영하기 위해 적용
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.flywaydb:flyway-core'
-	implementation 'io.springfox:springfox-swagger2:2.9.2'
-	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+	implementation 'io.springfox:springfox-swagger2:2.6.1'
+	implementation 'io.springfox:springfox-swagger-ui:2.6.1'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.h2database:h2'
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	// test
 	testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	
+	// DB
+	//implementation 'org.flywaydb:flyway-core'	
+	//runtimeOnly 'com.h2database:h2'
+	//runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	runtimeOnly 'mysql:mysql-connector-java'
+
+	// querydsl 	
+	implementation 'com.querydsl:querydsl-jpa'
+	implementation 'com.querydsl:querydsl-apt'
+
+	// jwt 인증
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 }
+
+/////////////////////////////////////////////////////////////////////////
+//querydsl 추가 시작 (참조 https://velog.io/@aidenshin/Querydsl-Gradle-%EC%84%A4%EC%A0%95)
+// vscode에서는  .\gradlew build 직접 해줘야 함.
+// QClass 접근 안되는경우 .classpath 수정할것!! (참조 https://yeti.tistory.com/250 )
+def querydslDir ='src/main/generated'
+
+querydsl {
+    library = "com.querydsl:querydsl-apt"
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
+
+sourceSets {
+	main.java.srcDirs querydslDir
+}
+/////////////////////////////////////////////////////////////////////////
 
 test {
 	useJUnitPlatform()
