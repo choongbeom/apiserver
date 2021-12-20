@@ -6,13 +6,13 @@ public enum ErrorCode {
     FAILURE(2001,   "2001", " Failure"),
    
     // Signin
-    NOT_USING_ACCOUNT(  2002, "SI01", "사용가능한 계정이 아닙니다."),
-    NOT_MATCH_ACCOUNT(  2002, "SI02", "아이디 또는 패스워드가 일치 하지 않습니다."),
-    RESTRICTED_ACCOUNT( 2002, "SI03", "해당 계정은 이용제한 상태입니다."),
-    DORMANT_ACCOUNT(    2002, "SI04", "해당 계정은 휴면 상태입니다."),
-    RESIGN_ACCOUNT(     2002, "SI05", "해당 계정은 탈퇴 또는 탈퇴대기 상태 입니다."),
-    FAILURE_SIGNIN(     2002, "SI06", "로그인을 실패 하였습니다."),
-    FAILURE_SIGNUP(     2002, "SI07", "회원가입을 실패 하였습니다."),
+    NOT_USING_ACCOUNT(  2002, "2002", "사용가능한 계정이 아닙니다."),
+    NOT_MATCH_ACCOUNT(  2002, "2002", "아이디 또는 패스워드가 일치 하지 않습니다."),
+    RESTRICTED_ACCOUNT( 2002, "2002", "해당 계정은 이용제한 상태입니다."),
+    DORMANT_ACCOUNT(    2002, "2002", "해당 계정은 휴면 상태입니다."),
+    RESIGN_ACCOUNT(     2002, "2002", "해당 계정은 탈퇴 또는 탈퇴대기 상태 입니다."),
+    FAILURE_SIGNIN(     2002, "2002", "로그인을 실패 하였습니다."),
+    FAILURE_SIGNUP(     2002, "2002", "회원가입을 실패 하였습니다."),
 
     // token
     EXPIRED_TOKEN(  9001, "9001", "세션이 만료되었습니다."),
@@ -40,5 +40,5 @@ public enum ErrorCode {
         this.status = status;
         this.message = message;
         this.code = code;
-    } 
+    }
 }

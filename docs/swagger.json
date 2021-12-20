@@ -1,0 +1,646 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "CBBKIM 서버 API에 대한 연동 문서입니다",
+    "version": "1.0",
+    "title": "CBKIM API",
+    "license": {
+      "name": "cbkim",
+      "url": "https://choongbeom.github.io/"
+    }
+  },
+  "host": "localhost:8081",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "001. Sign",
+      "description": "Sign Controller"
+    },
+    {
+      "name": "002. User",
+      "description": "User Controller"
+    },
+    {
+      "name": "003. Certification",
+      "description": "Certification Controller"
+    }
+  ],
+  "paths": {
+    "/v1/check/signin": {
+      "post": {
+        "tags": [
+          "001. Sign"
+        ],
+        "summary": "세션 정상 여부 확인",
+        "description": "세션 정상 여부 확인",
+        "operationId": "checkSigninUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "returnUrl",
+            "in": "query",
+            "description": "returnUrl",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "description": "token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommonResult"
+            }
+          }
+        }
+      }
+    },
+    "/v1/email": {
+      "post": {
+        "tags": [
+          "003. Certification"
+        ],
+        "summary": "이메일 인증코드 전송",
+        "description": "이메일 인증코드를 전송한다.",
+        "operationId": "sendEmailUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "이메일",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "X-AUTH-TOKEN",
+            "description": "로그인 성공 후 access_token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommonResult"
+            }
+          }
+        }
+      }
+    },
+    "/v1/email/certification": {
+      "post": {
+        "tags": [
+          "003. Certification"
+        ],
+        "summary": "이메일 인증코드 확인",
+        "description": "이메일 인증코드을 확인한다.",
+        "operationId": "emailCertificationUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "이메일",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "inputCode",
+            "in": "query",
+            "description": "인증코드",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "X-AUTH-TOKEN",
+            "description": "로그인 성공 후 access_token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommonResult"
+            }
+          }
+        }
+      }
+    },
+    "/v1/signin": {
+      "post": {
+        "tags": [
+          "001. Sign"
+        ],
+        "summary": "로그인",
+        "description": "회원 로그인을 한다.",
+        "operationId": "signinUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "autoSigninYn",
+            "in": "query",
+            "description": "자동로그인여부",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "회원ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userPw",
+            "in": "query",
+            "description": "비밀번호",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommonResult"
+            }
+          }
+        }
+      }
+    },
+    "/v1/signin/google": {
+      "get": {
+        "tags": [
+          "001. Sign"
+        ],
+        "summary": "google",
+        "description": "google",
+        "operationId": "signinGoogleUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "description": "google code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "google scope",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommonResult"
+            }
+          }
+        }
+      }
+    },
+    "/v1/signin/kakao": {
+      "get": {
+        "tags": [
+          "001. Sign"
+        ],
+        "summary": "kakao",
+        "description": "kakao",
+        "operationId": "signinKakaoUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "description": "kakao code",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommonResult"
+            }
+          }
+        }
+      }
+    },
+    "/v1/signin/naver": {
+      "get": {
+        "tags": [
+          "001. Sign"
+        ],
+        "summary": "naver",
+        "description": "naver",
+        "operationId": "signinNaverUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "description": "naver code",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommonResult"
+            }
+          }
+        }
+      }
+    },
+    "/v1/signin/provider": {
+      "get": {
+        "tags": [
+          "001. Sign"
+        ],
+        "summary": "소셜 회원 가입 및 로그인",
+        "description": "소셜 계정 회원가입을 한다.",
+        "operationId": "signinProviderUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "query",
+            "description": "서비스 제공자 provider(google, kakao, naver)",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommonResult"
+            }
+          }
+        }
+      }
+    },
+    "/v1/signup": {
+      "post": {
+        "tags": [
+          "001. Sign"
+        ],
+        "summary": "회원가입",
+        "description": "회원가입을 한다.",
+        "operationId": "signupUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "이름",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nickName",
+            "in": "query",
+            "description": "닉네임",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "receiveMarketingEmailYn",
+            "in": "query",
+            "description": "마케팅 정보 수신 동의 여부 - 이메일",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "receiveMarketingKakaotalkYn",
+            "in": "query",
+            "description": "마케팅 정보 수신 동의 여부 - 카카오톡",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "receiveMarketingSmsYn",
+            "in": "query",
+            "description": "마케팅 정보 수신 동의 여부 - 문자",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommentdationCode",
+            "in": "query",
+            "description": "추천인코드",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "termsConditionsYn",
+            "in": "query",
+            "description": "이용약관 동의 여부",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "usePersonalInformationYn",
+            "in": "query",
+            "description": "개인정보 수집 및 이용에 대한 동의 여부",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "회원ID : 이메일",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userIdx",
+            "in": "query",
+            "description": "userIdx",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userPw",
+            "in": "query",
+            "description": "비밀번호",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommonResult"
+            }
+          }
+        }
+      }
+    },
+    "/v1/user": {
+      "get": {
+        "tags": [
+          "002. User"
+        ],
+        "summary": "회원정보 검색",
+        "description": "회원을 검색한다.",
+        "operationId": "getUserUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "idx",
+            "in": "query",
+            "description": "User Idx",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SingleResult«UserDto»"
+            }
+          }
+        }
+      }
+    },
+    "/v1/user/profile": {
+      "get": {
+        "tags": [
+          "002. User"
+        ],
+        "summary": "내 정보 조회",
+        "description": "내 정보 조회",
+        "operationId": "findUserProfileUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-AUTH-TOKEN",
+            "description": "로그인 성공 후 access_token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SingleResult«UserDto»"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CodeManagementDto": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "codeValue": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "idx": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "parentCode": {
+          "type": "string"
+        }
+      },
+      "title": "CodeManagementDto"
+    },
+    "CommonResult": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "응답 코드 번호 : >= 0 정상, < 0 비정상"
+        },
+        "msg": {
+          "type": "string",
+          "description": "응답 메시지"
+        },
+        "retoken": {
+          "type": "string",
+          "description": "토큰 재발행"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "응답 성공여부 : true/false"
+        }
+      },
+      "title": "CommonResult"
+    },
+    "ImageDto": {
+      "type": "object",
+      "properties": {
+        "alt": {
+          "type": "string"
+        },
+        "imageRef": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "titleYn": {
+          "type": "string"
+        }
+      },
+      "title": "ImageDto"
+    },
+    "SingleResult«UserDto»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "응답 코드 번호 : >= 0 정상, < 0 비정상"
+        },
+        "data": {
+          "$ref": "#/definitions/UserDto"
+        },
+        "msg": {
+          "type": "string",
+          "description": "응답 메시지"
+        },
+        "retoken": {
+          "type": "string",
+          "description": "토큰 재발행"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "응답 성공여부 : true/false"
+        }
+      },
+      "title": "SingleResult«UserDto»"
+    },
+    "UserDto": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "addressSub": {
+          "type": "string"
+        },
+        "birth": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "idx": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "image": {
+          "$ref": "#/definitions/ImageDto"
+        },
+        "memo": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nickName": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/CodeManagementDto"
+        },
+        "userCode": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "userPw": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "zipcode": {
+          "type": "string"
+        }
+      },
+      "title": "UserDto"
+    }
+  }
+}

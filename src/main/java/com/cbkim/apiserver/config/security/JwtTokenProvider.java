@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JwtTokenProvider { // JWT 토큰을 생성 및 검증 모듈
 
-    @Value("spring.jwt.secret")
+    @Value("${spring.jwt.secret}")
     private String secretKey;
     private long tokenValidMilisecond = 1000L * 60 * 60 * 24 * 1; // 1일 토근 유효
 
@@ -70,27 +70,27 @@ public class JwtTokenProvider { // JWT 토큰을 생성 및 검증 모듈
     public String resolveToken(HttpServletRequest req) {
         return req.getHeader("X-AUTH-TOKEN");
     }
-    
+
     // Jwt 토큰의 유효성 + 만료일자 확인
     public boolean validateToken(ServletRequest request, String jwtToken) {
         boolean rtn = false;
 
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
-         
+
             // 날짜 체크
             rtn = !claims.getBody().getExpiration().before(new Date());
         } catch (ExpiredJwtException e) {
             log.info("ExpiredJwtException");
             request.setAttribute("exception", ErrorCode.EXPIRED_TOKEN.getCode());
-            
+
         } catch (JwtException e) {
             //log.info("JwtException");
            // e.printStackTrace();
             request.setAttribute("exception", ErrorCode.INVALID_TOKEN.getCode());
         }
 
-        return rtn;        
+        return rtn;
     }
 
     // Jwt 토큰의 유효성 + 만료일자 확인
@@ -107,8 +107,8 @@ public class JwtTokenProvider { // JWT 토큰을 생성 및 검증 모듈
             log.info("JwtException");
             e.printStackTrace();
         }
-        
-        return rtn;        
+
+        return rtn;
     }
 
     // Jwt 토큰의 유효성만 체크
@@ -127,7 +127,7 @@ public class JwtTokenProvider { // JWT 토큰을 생성 및 검증 모듈
             log.info("JwtException");
             e.printStackTrace();
         }
-        
-        return rtn;        
+
+        return rtn;
     }
 }

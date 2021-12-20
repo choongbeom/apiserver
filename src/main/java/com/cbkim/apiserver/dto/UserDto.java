@@ -2,6 +2,7 @@ package com.cbkim.apiserver.dto;
 
 import com.cbkim.apiserver.entity.Users;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,23 +14,58 @@ import lombok.Setter;
 @Data
 public class UserDto {
 
+    @ApiModelProperty(value = "user idx")
     private long idx;
+
+    @ApiModelProperty(value = "user code")
     private String userCode;
+
+    @ApiModelProperty(value = "user id")
     private String userId;
+
+    @ApiModelProperty(value = "user password")
     private String userPw;
+
+    @ApiModelProperty(value = "user status")
     private CodeManagementDto status;
+
+    @ApiModelProperty(value = "user name")
     private String name;
-    private String phone;   
+
+    @ApiModelProperty(value = "user phone number")
+    private String phone;
+
+    @ApiModelProperty(value = "user email")
     private String email;
+
+    @ApiModelProperty(value = "user nickName")
     private String nickName;
-    private ImageDto image; 
+
+    @ApiModelProperty(value = "user image")
+    private ImageDto image;
+
+    @ApiModelProperty(value = "user memo")
     private String memo;
-    private String address;   
-    private String addressSub; 
-    private String zipcode; 
+
+    @ApiModelProperty(value = "user address")
+    private String address;
+
+    @ApiModelProperty(value = "user sub address")
+    private String addressSub;
+
+    @ApiModelProperty(value = "user zipcode")
+    private String zipcode;
+
+    @ApiModelProperty(value = "user birthday")
     private String birth;
+
+    @ApiModelProperty(value = "user gender")
     private String gender;
+
+    @ApiModelProperty(value = "user height")
     private long height;
+
+    @ApiModelProperty(value = "user weight")
     private long weight;
 
     // DTO -> Entity
@@ -61,12 +97,12 @@ public class UserDto {
     public UserDto(Users user)
     {
         if(user == null) return;
-        
-        this.idx            = user.getIdx(); 
+
+        this.idx            = user.getIdx();
         this.userCode       = user.getUserCode();
-        this.userId         = user.getUserId(); 
+        this.userId         = user.getUserId();
         this.status         = new CodeManagementDto(user.getStatus());
-        this.name           = user.getName();         
+        this.name           = user.getName();
         this.image          = new ImageDto(user.getImage());
         this.phone          = user.getPhone();
         this.memo           = user.getMemo();
@@ -79,5 +115,5 @@ public class UserDto {
         this.gender         = user.getGender();
         this.height         = user.getWeight();
         this.weight         = user.getWeight();
-    }  
+    }
 }

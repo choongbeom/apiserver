@@ -6,6 +6,7 @@ import java.util.Date;
 import com.cbkim.apiserver.entity.Images;
 import com.cbkim.apiserver.util.RandomGenerator;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,10 +18,17 @@ import lombok.Setter;
 @Data
 public class ImageDto{
 
-    private String alt;     // 이미지 툴팁
-    private String src;     // 이미지 경로
-    private String titleYn; // 대표이미지 여부
-    private String imageRef; // 이미지 컴포넌트 ID
+    @ApiModelProperty(value = "이미지 툴팁")
+    private String alt;
+
+    @ApiModelProperty(value = "이미지 경로")
+    private String src;
+
+    @ApiModelProperty(value = "대표이미지 여부")
+    private String titleYn;
+
+    @ApiModelProperty(value = "이미지 컴포넌트 ID")
+    private String imageRef;
 
     // DTO -> Entity
     public Images insert() {
@@ -31,7 +39,7 @@ public class ImageDto{
         if(this.src != null) image.setSrc(this.src);
         if(this.titleYn != null) image.setTitleYn(this.titleYn);
         if(this.imageRef != null) image.setImageRef(this.imageRef);
-        
+
         SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
         Date time = new Date();
         String time1 = format1.format(time);
@@ -45,8 +53,8 @@ public class ImageDto{
     public ImageDto(Images image) {
 
         if(image == null) return;
-        
-        this.alt = image.getAlt();    
+
+        this.alt = image.getAlt();
         this.titleYn = image.getTitleYn();
         this.src = image.getSrc();
         this.imageRef = image.getImageRef();

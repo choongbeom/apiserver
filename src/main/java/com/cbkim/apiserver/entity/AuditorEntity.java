@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 
 // Auditing: 엔티티의 변경 시점에 언제, 누가 변경했는지에 대한 정보를 기록하는 기능
 @Getter
-@MappedSuperclass 
+@MappedSuperclass
 @EntityListeners(value = { AuditingEntityListener.class })
 public class AuditorEntity {
     @CreatedDate
@@ -27,10 +27,10 @@ public class AuditorEntity {
     private LocalDateTime updateDate;
 
     @CreatedBy
-    @Column(name = "create_by", updatable = false, columnDefinition = "varchar(100) comment '생성자'")    
+    @Column(name = "create_by", updatable = false, columnDefinition = "varchar(100) comment '생성자'")
     private String createBy;
- 
+
     @LastModifiedBy
-    @Column(name = "update_by", columnDefinition = "varchar(100) comment '수정자'")    
+    @Column(name = "update_by", columnDefinition = "varchar(100) comment '수정자'")
     private String updateBy;
 }

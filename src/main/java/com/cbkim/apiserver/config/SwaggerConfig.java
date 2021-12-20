@@ -19,17 +19,18 @@ public class SwaggerConfig {
 
     @Bean
     public Docket swaggerApi() {
-        
+
     version = "1.0";
     title = "CBKIM API";
 
     return new Docket(DocumentationType.SWAGGER_2)
+            .groupName("CBKIM API")
+            .apiInfo(apiInfo(title, version))
             .useDefaultResponseMessages(false)
             .select()
             .apis(RequestHandlerSelectors.basePackage("com.cbkim.apiserver.controller"))
             .paths(PathSelectors.any())
-            .build()
-            .apiInfo(apiInfo(title, version));
+            .build();
     }
 
     private ApiInfo apiInfo(String title, String version) {

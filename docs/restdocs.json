@@ -1,0 +1,279 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "CBKIM API",
+    "description" : "CBBKIM 서버 API에 대한 연동 문서입니다.",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:8081"
+  } ],
+  "tags" : [ ],
+  "paths" : {
+    "/v1/user" : {
+      "get" : {
+        "tags" : [ "v1" ],
+        "summary" : "Get a user by idx",
+        "description" : "Get a user by idx",
+        "operationId" : "user-get",
+        "parameters" : [ {
+          "name" : "idx",
+          "in" : "query",
+          "description" : "user idx",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/hal+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/v1-user-960736003"
+                },
+                "examples" : {
+                  "user-get" : {
+                    "value" : "{\"success\":true,\"code\":0,\"msg\":\"성공하였습니다.\",\"retoken\":null,\"data\":{\"idx\":1,\"userCode\":\"MXBCSQMHO7\",\"userId\":\"toonme@nate.com\",\"userPw\":null,\"status\":{\"idx\":3,\"code\":\"USC001\",\"codeValue\":\"정상\",\"parentCode\":\"UC0001\",\"description\":\"회원 상태 정상\"},\"name\":\"김충범\",\"phone\":null,\"email\":\"toonme@nate.com\",\"nickName\":\"김충범\",\"image\":{\"alt\":null,\"src\":null,\"titleYn\":null,\"imageRef\":null},\"memo\":null,\"address\":\"경기도 시흥시 남왕길 48-8\",\"addressSub\":\"201호\",\"zipcode\":null,\"birth\":\"19840531\",\"gender\":\"남\",\"height\":0,\"weight\":0}}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/user/profile" : {
+      "get" : {
+        "tags" : [ "v1" ],
+        "summary" : "Get a user profile",
+        "description" : "Get a user profile",
+        "operationId" : "user-profile-get",
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/hal+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/v1-user-profile119935009"
+                },
+                "examples" : {
+                  "user-profile-get" : {
+                    "value" : "{\"success\":true,\"code\":0,\"msg\":\"성공하였습니다.\",\"retoken\":\"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTYzODk1MDAwMywiZXhwIjoxNjM5MDM2NDAzfQ.d4XSH0OITnZUj5uz4UoYIMietSJl4QNUpZ5VQfpSeCo\",\"data\":{\"idx\":1,\"userCode\":\"MXBCSQMHO7\",\"userId\":\"toonme@nate.com\",\"userPw\":null,\"status\":{\"idx\":3,\"code\":\"USC001\",\"codeValue\":\"정상\",\"parentCode\":\"UC0001\",\"description\":\"회원 상태 정상\"},\"name\":\"김충범\",\"phone\":null,\"email\":\"toonme@nate.com\",\"nickName\":\"김충범\",\"image\":{\"alt\":null,\"src\":null,\"titleYn\":null,\"imageRef\":null},\"memo\":null,\"address\":\"경기도 시흥시 남왕길 48-8\",\"addressSub\":\"201호\",\"zipcode\":null,\"birth\":\"19840531\",\"gender\":\"남\",\"height\":0,\"weight\":0}}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "v1-user-960736003" : {
+        "type" : "object",
+        "properties" : {
+          "msg" : {
+            "type" : "string",
+            "description" : "응답 메시지"
+          },
+          "code" : {
+            "type" : "number",
+            "description" : "응답 코드 번호 : >= 0 정상, < 0 비정상"
+          },
+          "data" : {
+            "type" : "object",
+            "properties" : {
+              "image" : {
+                "type" : "object",
+                "properties" : { }
+              },
+              "addressSub" : {
+                "type" : "string",
+                "description" : "user addressSub"
+              },
+              "address" : {
+                "type" : "string",
+                "description" : "user address"
+              },
+              "gender" : {
+                "type" : "string",
+                "description" : "user gender"
+              },
+              "nickName" : {
+                "type" : "string",
+                "description" : "user nickName"
+              },
+              "weight" : {
+                "type" : "number",
+                "description" : "user weight"
+              },
+              "birth" : {
+                "type" : "string",
+                "description" : "user birth"
+              },
+              "userId" : {
+                "type" : "string",
+                "description" : "user id"
+              },
+              "userCode" : {
+                "type" : "string",
+                "description" : "user code"
+              },
+              "name" : {
+                "type" : "string",
+                "description" : "user name"
+              },
+              "idx" : {
+                "type" : "number",
+                "description" : "user idx"
+              },
+              "email" : {
+                "type" : "string",
+                "description" : "user email"
+              },
+              "height" : {
+                "type" : "number",
+                "description" : "user height"
+              },
+              "status" : {
+                "type" : "object",
+                "properties" : {
+                  "code" : {
+                    "type" : "string",
+                    "description" : "user status code: USC001(정상) USC002(탈퇴) USC003(휴면) USC004(탈퇴요청) USC005(계정정지)"
+                  },
+                  "parentCode" : {
+                    "type" : "string",
+                    "description" : "user status parent code"
+                  },
+                  "description" : {
+                    "type" : "string",
+                    "description" : "user status description"
+                  },
+                  "idx" : {
+                    "type" : "number",
+                    "description" : "user status idx"
+                  },
+                  "codeValue" : {
+                    "type" : "string",
+                    "description" : "user status code value"
+                  }
+                }
+              }
+            }
+          },
+          "success" : {
+            "type" : "boolean",
+            "description" : "응답 성공여부 : true/false"
+          }
+        }
+      },
+      "v1-user-profile119935009" : {
+        "type" : "object",
+        "properties" : {
+          "retoken" : {
+            "type" : "string",
+            "description" : "토큰 재발행"
+          },
+          "msg" : {
+            "type" : "string",
+            "description" : "응답 메시지"
+          },
+          "code" : {
+            "type" : "number",
+            "description" : "응답 코드 번호 : >= 0 정상, < 0 비정상"
+          },
+          "data" : {
+            "type" : "object",
+            "properties" : {
+              "image" : {
+                "type" : "object",
+                "properties" : { }
+              },
+              "addressSub" : {
+                "type" : "string",
+                "description" : "user addressSub"
+              },
+              "address" : {
+                "type" : "string",
+                "description" : "user address"
+              },
+              "gender" : {
+                "type" : "string",
+                "description" : "user gender"
+              },
+              "nickName" : {
+                "type" : "string",
+                "description" : "user nickName"
+              },
+              "weight" : {
+                "type" : "number",
+                "description" : "user weight"
+              },
+              "birth" : {
+                "type" : "string",
+                "description" : "user birth"
+              },
+              "userId" : {
+                "type" : "string",
+                "description" : "user id"
+              },
+              "userCode" : {
+                "type" : "string",
+                "description" : "user code"
+              },
+              "name" : {
+                "type" : "string",
+                "description" : "user name"
+              },
+              "idx" : {
+                "type" : "number",
+                "description" : "user idx"
+              },
+              "email" : {
+                "type" : "string",
+                "description" : "user email"
+              },
+              "height" : {
+                "type" : "number",
+                "description" : "user height"
+              },
+              "status" : {
+                "type" : "object",
+                "properties" : {
+                  "code" : {
+                    "type" : "string",
+                    "description" : "user status code: USC001(정상) USC002(탈퇴) USC003(휴면) USC004(탈퇴요청) USC005(계정정지)"
+                  },
+                  "parentCode" : {
+                    "type" : "string",
+                    "description" : "user status parent code"
+                  },
+                  "description" : {
+                    "type" : "string",
+                    "description" : "user status description"
+                  },
+                  "idx" : {
+                    "type" : "number",
+                    "description" : "user status idx"
+                  },
+                  "codeValue" : {
+                    "type" : "string",
+                    "description" : "user status code value"
+                  }
+                }
+              }
+            }
+          },
+          "success" : {
+            "type" : "boolean",
+            "description" : "응답 성공여부 : true/false"
+          }
+        }
+      }
+    }
+  }
+}
