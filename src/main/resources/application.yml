@@ -15,7 +15,7 @@ spring:
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://127.0.0.1:3306/cbkim?useSSL=false&useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
         username: root
-        password: 1234qwer!
+        password: 1234567890
         #initialization-mode: always
 
     sql:
@@ -75,13 +75,13 @@ spring:
         host: smtp.gmail.com
         port: 587
         username: cbkim@voimtech.com
-        password: vptweztjidoohljh
+        password: 1234567890
 
         # naver
         #host: smtp.naver.com
         #port: 465
         #username: toonme@naver.com
-        #password: qjadl0531A
+        #password: 1234567890
 
         # 전송하기 위한 prop으로 ssl의 신뢰, 권한 등 사용허가
         properties:
@@ -96,16 +96,16 @@ spring:
     # 각 개발 사이트에 가입하여 어플리케이션을 생성한 다음 키를 받아야함.
     provider:
         google:
-            client-id: 1053944983572-u13pt0nr6v3v9ou2qqqjseftt8gnuva2.apps.googleusercontent.com
-            client-secret: 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
+            client-id: 
+            client-secret: 
             scope: profile, email
 
         naver:
-            client-id: 9ECbMNhcRNPkP6yAahsN
-            client-secret: w5pXiSaOud
+            client-id: 
+            client-secret: 
 
         kakao:
-            client-id: 0de9dba0c5b60a752511a4ccc4826ba1
+            client-id: 
 
 
 
